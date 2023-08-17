@@ -54,7 +54,7 @@ gradle-app.setting
 .idea/
 .idea_modules/
 *.iml
-*.xml
+##*.xml
 *.ipr
 *.iws
 

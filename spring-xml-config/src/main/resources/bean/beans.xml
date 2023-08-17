@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+  "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+  <bean id = "student" class = "com.cedacri.model.Student">
+    <property name = "firstName" value = "firstName"/>
+    <property name = "lastName" value = "lasthgfName"/>
+  </bean>
+
+  <!--    it creates a shared EntityManager for EntityManagerFactory the same way as @PersistenceContext-->
+  <!--    //EM is not thread safe that's why we have to use @PersistenceContext so that container injects a proxy that is thread safe
+  injectat in AbstractGenericDAO class-->
+  <bean id="studentDAO" class="com.cedacri.DAO.StudentDAO">
+    <property name="entityManager">
+      <bean class = "org.springframework.orm.jpa.support.SharedEntityManagerBean">
+        <property name = "entityManagerFactory" ref="myEmf"/>
+      </bean>
+    </property>
+  </bean>
+
+  <bean id = "studentService" class = "com.cedacri.service.StudentService">
+    <constructor-arg index="0" ref="studentDAO"/>
+  </bean>
+</beans>
